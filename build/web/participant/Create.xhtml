@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParticipantCreateDlg" widgetVar="ParticipantCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateParticipantTitle}">
+            <h:form id="ParticipantCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{participantController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{participantController.selected.id}" title="#{bundle.CreateParticipantTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.CreateParticipantTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{participantController.selected.designation}" title="#{bundle.CreateParticipantTitle_designation}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{participantController.selected.email}" title="#{bundle.CreateParticipantTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{participantController.selected.phone}" title="#{bundle.CreateParticipantTitle_phone}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{participantController.selected.gender}" title="#{bundle.CreateParticipantTitle_gender}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_institution}" for="institution" />
+                        <p:selectOneMenu id="institution" value="#{participantController.selected.institution}" >
+                            <f:selectItems value="#{institutionController.itemsAvailableSelectOne}"
+                                           var="institutionItem"
+                                           itemValue="#{institutionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_signature}" for="signature" />
+                        <p:inputTextarea rows="4" cols="30" id="signature" value="#{participantController.selected.signature}" title="#{bundle.CreateParticipantTitle_signature}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_baImage}" for="baImage" />
+                        <p:inputTextarea rows="4" cols="30" id="baImage" value="#{participantController.selected.baImage}" title="#{bundle.CreateParticipantTitle_baImage}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_fileName}" for="fileName" />
+                        <p:inputText id="fileName" value="#{participantController.selected.fileName}" title="#{bundle.CreateParticipantTitle_fileName}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_fileType}" for="fileType" />
+                        <p:inputText id="fileType" value="#{participantController.selected.fileType}" title="#{bundle.CreateParticipantTitle_fileType}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{participantController.create}" value="#{bundle.Save}" update="display,:ParticipantListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipantCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

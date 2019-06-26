@@ -4,9 +4,21 @@ import entity.Participant;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
 import bean.ParticipantFacade;
+import entity.Category;
+import entity.Gender;
+import entity.Institution;
+import entity.RoomType;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +30,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import org.primefaces.model.UploadedFile;
 
 @Named("participantController")
 @SessionScoped
@@ -25,10 +43,149 @@ public class ParticipantController implements Serializable {
 
     @EJB
     private bean.ParticipantFacade ejbFacade;
+    
+    @Inject
+    CategoryController categoryController;
+    @Inject
+    InstitutionController institutionController;
+    
     private List<Participant> items = null;
     private Participant selected;
+    
+    private UploadedFile file;
 
     public ParticipantController() {
+    }
+
+    public CategoryController getCategoryController() {
+        return categoryController;
+    }
+
+    public InstitutionController getInstitutionController() {
+        return institutionController;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+    
+    
+    
+    public String importProjectsFromExcel() {
+        String strCat;
+        String strIns;
+        String strName;
+        String strDesignation;
+        String strPhone;
+        String strEmail;
+        String strGender;
+        String strRoomType;
+        String strStay;
+
+       
+        Institution ins;
+        Category category;
+        
+        File inputWorkbook;
+        Workbook w;
+        Cell cell;
+        InputStream in;
+
+        int startRow = 1;
+
+        JsfUtil.addSuccessMessage(file.getFileName());
+
+        try {
+            JsfUtil.addSuccessMessage(file.getFileName());
+            in = file.getInputstream();
+            File f;
+            f = new File(Calendar.getInstance().getTimeInMillis() + file.getFileName());
+            FileOutputStream out = new FileOutputStream(f);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            in.close();
+            out.flush();
+            out.close();
+
+            inputWorkbook = new File(f.getAbsolutePath());
+
+            JsfUtil.addSuccessMessage("Excel File Opened");
+            w = Workbook.getWorkbook(inputWorkbook);
+            Sheet sheet = w.getSheet(0);
+
+            for (int i = startRow; i < sheet.getRows(); i++) {
+
+                
+
+                Map m = new HashMap();
+
+                //Category
+                cell = sheet.getCell(0, i);
+                strCat = cell.getContents();
+                category = categoryController.getCategory(strCat, true);
+
+                cell = sheet.getCell(1, i);
+                strIns = cell.getContents();
+                ins = institutionController.getInstitution(strIns, category, true);
+                
+                Participant np = ins.getParticipants().get(0);
+                
+                cell = sheet.getCell(2, i);
+                strName = cell.getContents();
+                np.setName(strName);
+
+                cell = sheet.getCell(3, i);
+                strDesignation = cell.getContents();
+                np.setDesignation(strDesignation);
+
+                cell = sheet.getCell(4, i);
+                strPhone = cell.getContents();
+                np.setPhone(strPhone);
+
+                cell = sheet.getCell(5, i);
+                strEmail = cell.getContents();
+                np.setEmail(strEmail);
+
+                cell = sheet.getCell(6, i);
+                strGender = cell.getContents();
+                if(strGender.equalsIgnoreCase("Female")){
+                    np.setGender(Gender.Female);
+                }else{
+                    np.setGender(Gender.Male);
+                }
+                
+                cell = sheet.getCell(7, i);
+                strRoomType = cell.getContents();
+                if(strRoomType.equalsIgnoreCase("Double")){
+                    np.setRoomType(RoomType.Double);
+                }else{
+                    np.setRoomType(RoomType.Single);
+                }
+                
+                cell = sheet.getCell(7, i);
+                strStay = cell.getContents();
+                if(strStay.equalsIgnoreCase("Yes")){
+                    np.setOvernightStay(true);
+                }else{
+                    np.setOvernightStay(false);
+                }
+                
+                institutionController.saveOrUpdate(ins);
+
+            }
+
+            JsfUtil.addSuccessMessage("Succesful. All the data in Excel File Impoted to the database");
+            return "";
+        } catch (IOException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+            return "";
+        } catch (BiffException e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+            return "";
+        }
     }
 
     public Participant getSelected() {

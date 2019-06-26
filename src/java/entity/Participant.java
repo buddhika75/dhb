@@ -37,9 +37,12 @@ public class Participant implements Serializable {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType;
 
     private boolean firstDay=true;
     private boolean secondDay=true;
+    private boolean overnightStay=true;
     
     
     
@@ -187,5 +190,23 @@ public class Participant implements Serializable {
     public void setSecondDay(boolean secondDay) {
         this.secondDay = secondDay;
     }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public boolean isOvernightStay() {
+        return overnightStay;
+    }
+
+    public void setOvernightStay(boolean overnightStay) {
+        this.overnightStay = overnightStay;
+    }
     
+
+
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParticipantViewDlg" widgetVar="ParticipantViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewParticipantTitle}">
+            <h:form id="ParticipantViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{participantController.selected != null}">
+                        <h:outputText value="#{bundle.ViewParticipantLabel_id}"/>
+                        <h:outputText value="#{participantController.selected.id}" title="#{bundle.ViewParticipantTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_name}"/>
+                        <h:outputText value="#{participantController.selected.name}" title="#{bundle.ViewParticipantTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_designation}"/>
+                        <h:outputText value="#{participantController.selected.designation}" title="#{bundle.ViewParticipantTitle_designation}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_email}"/>
+                        <h:outputText value="#{participantController.selected.email}" title="#{bundle.ViewParticipantTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_phone}"/>
+                        <h:outputText value="#{participantController.selected.phone}" title="#{bundle.ViewParticipantTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_gender}"/>
+                        <h:outputText value="#{participantController.selected.gender}" title="#{bundle.ViewParticipantTitle_gender}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_institution}"/>
+                        <h:outputText value="#{participantController.selected.institution}" title="#{bundle.ViewParticipantTitle_institution}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_signature}"/>
+                        <h:outputText value="#{participantController.selected.signature}" title="#{bundle.ViewParticipantTitle_signature}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_baImage}"/>
+                        <h:outputText value="#{participantController.selected.baImage}" title="#{bundle.ViewParticipantTitle_baImage}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_fileName}"/>
+                        <h:outputText value="#{participantController.selected.fileName}" title="#{bundle.ViewParticipantTitle_fileName}"/>
+                        <h:outputText value="#{bundle.ViewParticipantLabel_fileType}"/>
+                        <h:outputText value="#{participantController.selected.fileType}" title="#{bundle.ViewParticipantTitle_fileType}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ParticipantViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -6,7 +6,10 @@ import jsf.util.JsfUtil.PersistAction;
 import bean.CategoryFacade;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +48,30 @@ public class CategoryController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
+    
+    public Category getCategory(String name, boolean createNew) {
+        if(name.trim().equals("")){
+            return null;
+        }
+        String j;
+        Map m = new HashMap();
+        j = "select a "
+                + " from Category a "
+                + " where (upper(a.name) =:n)  ";
+        m.put("n", name.toUpperCase());
+        
+        j += " order by a.name";
+        System.out.println("m = " + m);
+        System.out.println("j = " + j);
+        Category ta = getFacade().findFirstBySQL(j, m);
+        if(ta==null && createNew){
+            ta = new Category();
+            ta.setName(name);
+            getFacade().create(ta);
+        }
+        return ta;
+    }
+    
     private CategoryFacade getFacade() {
         return ejbFacade;
     }

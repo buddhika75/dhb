@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./tmpl.xhtml">
+
+            <ui:define name="content">
+
+
+                <h:form>
+                    <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em;" >
+
+                        <ui:repeat value="#{institutionController.categoryItems}" var="c" >
+                            <div class="w3-col m4 l3" >
+
+                                <h:commandLink value="#{c.name}" class="w3-button w3-bar-item" action="participant"
+                                               style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
+                                    <f:setPropertyActionListener value="#{c}" target="#{institutionController.selected}" ></f:setPropertyActionListener>
+                                </h:commandLink>
+
+                            </div>
+                        </ui:repeat>
+
+                        <h:commandLink value="Back" class="w3-button w3-bar-item" action="index"
+                                       style="width: 100%; padding: 2%; ">
+                        </h:commandLink>
+
+                    </div>
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

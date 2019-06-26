@@ -49,6 +49,31 @@ public class InstitutionController implements Serializable {
         this.selected = selected;
     }
 
+    
+    public Institution getInstitution(String name, Category cat, boolean createNew) {
+        if(name.trim().equals("")){
+            return null;
+        }
+        String j;
+        Map m = new HashMap();
+        j = "select a "
+                + " from Institution a "
+                + " where (upper(a.name) =:n) and a.category=:c ";
+        m.put("n", name.toUpperCase());
+         m.put("c", cat);
+        j += " order by a.name";
+        System.out.println("m = " + m);
+        System.out.println("j = " + j);
+        Institution ta = getFacade().findFirstBySQL(j, m);
+        if(ta==null && createNew){
+            ta = new Institution();
+            ta.setName(name);
+            ta.setCategory(category);
+            getFacade().create(ta);
+        }
+        return ta;
+    }
+    
     protected void setEmbeddableKeys() {
     }
 
@@ -101,6 +126,19 @@ public class InstitutionController implements Serializable {
         return "";
     }
 
+    
+    public String saveOrUpdate(Institution ins) {
+        if (ins == null) {
+            return "";
+        }
+        if (ins.getId() == null) {
+            getFacade().create(ins);
+        } else {
+            getFacade().edit(ins);
+        }
+        return "";
+    }
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InstitutionUpdated"));
     }
