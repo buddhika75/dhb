@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Workshop</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
         <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
@@ -14,14 +14,20 @@
     </h:head>
     <h:body>
 
+        
+
+        <div class="w3-container w3-teal header w3-margin-bottom">
+           Preparatory Workshop on National Digital Health Blueprint 
+        </div>
+
         <h:form>
-            <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em;" >
+            <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em; text-align: center;" >
 
                 <ui:repeat value="#{categoryController.items}" var="c" >
-                    <div class="w3-bar" >
+                    <div class="w3-col m4 l3 w3-padding" >
 
-                        <h:commandLink value="#{c.name}" class="w3-button w3-bar-item" action="institution"
-                                       style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
+                        <h:commandLink value="#{c.name}" class="w3-button w3-bar-item w3-deep-orange w3-round-large" action="institution"
+                                       style="width: 80%;">
                             <f:setPropertyActionListener value="#{c}" target="#{institutionController.category}" ></f:setPropertyActionListener>
                         </h:commandLink>
 
@@ -31,6 +37,16 @@
             </div>
         </h:form>
 
+
+        <div class="footer" >
+            <div style="float: left;" >
+                Ministry of Health, Nutrition &amp; Indigenous Medicine
+            </div>
+            <div style="float: right;">
+                World Health Organization
+            </div>
+            
+        </div>
 
     </h:body>
 

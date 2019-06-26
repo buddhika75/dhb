@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Workshop</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="main.css" ></h:outputStylesheet>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
         <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
@@ -21,16 +21,18 @@
                 <p:autoUpdate />
             </p:growl>
 
-            <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em;" >
-
-                #{institutionController.selectedParcipant}
-                <div class="w3-col m4 l3" >
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Name:" for="name" />
-                        <p:inputText id="name" value="#{institutionController.selectedParcipant.name}" title="Name" />
-                        <p:outputLabel value="Designation:" for="designation" />
-                        <p:inputText id="designation" value="#{institutionController.selectedParcipant.designation}" title="Designation" />
-                        <p:outputLabel value="Email:" for="email" />
+            <div class="w3-row" style="text-align: center;"  >
+                
+                <p:panelGrid columns="2" style="width: 95%; margin: 1% auto;">
+                        <h:outputLabel value="Name:" for="name" styleClass="reg" />
+                        <h:inputText id="name" value="#{institutionController.selectedParcipant.name}" 
+                                      styleClass="reg" />
+                        <h:outputLabel value="Designation:" for="designation" 
+                                        styleClass="reg" 
+                                       />
+                        <h:inputText id="designation" value="#{institutionController.selectedParcipant.designation}" 
+                                     title="Designation"  styleClass="reg" />
+                        <p:outputLabel value="Email:" for="email"  styleClass="reg" />
                         <p:inputText id="email" value="#{institutionController.selectedParcipant.email}" title="Email" />
                         <p:outputLabel value="Phone:" for="phone" />
                         <p:inputText id="phone" value="#{institutionController.selectedParcipant.phone}" title="Phone" />
@@ -48,10 +50,10 @@
                                    style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
                     </h:commandLink>
 
-                </div>
 
-
-                <p:signature style="width:400px;height:200px" widgetVar="sig" value="#{institutionController.selectedParcipant.signature}" required="true" guideline="true"/>
+                <p:signature style="width:90%;height:200px;margin: auto;" widgetVar="sig"
+                             value="#{institutionController.selectedParcipant.signature}" 
+                             required="true" guideline="true"/>
 
                 <div style="margin:20px 0">
                     <p:commandButton value="Submit" icon="pi pi-check" update="output"/>
