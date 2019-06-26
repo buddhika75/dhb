@@ -1,44 +1,42 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Workshop</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
-        <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
 
-    </h:head>
-    <h:body>
+    <body>
 
-        <h:form>
-            <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em;" >
+        <ui:composition template="./tmpl.xhtml">
 
-                <ui:repeat value="#{institutionController.categoryItems}" var="c" >
-                    <div class="w3-col m4 l3" >
+            <ui:define name="content">
 
-                        <h:commandLink value="#{c.name}" class="w3-button w3-bar-item" action="participant"
-                                       style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
-                            <f:setPropertyActionListener value="#{c}" target="#{institutionController.selected}" ></f:setPropertyActionListener>
+
+                <h:form>
+                    <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em;" >
+
+                        <ui:repeat value="#{institutionController.categoryItems}" var="c" >
+                            <div class="w3-col m4 l3" >
+
+                                <h:commandLink value="#{c.name}" class="w3-button w3-bar-item" action="participant"
+                                               style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
+                                    <f:setPropertyActionListener value="#{c}" target="#{institutionController.selected}" ></f:setPropertyActionListener>
+                                </h:commandLink>
+
+                            </div>
+                        </ui:repeat>
+
+                        <h:commandLink value="Back" class="w3-button w3-bar-item" action="index"
+                                       style="width: 100%; padding: 2%; ">
                         </h:commandLink>
 
                     </div>
-                </ui:repeat>
-
-                <h:commandLink value="Back" class="w3-button w3-bar-item" action="index"
-                               style="width: 100%; padding: 2%; ">
-                </h:commandLink>
-
-            </div>
-        </h:form>
+                </h:form>
 
 
-    </h:body>
+            </ui:define>
 
+        </ui:composition>
 
-
+    </body>
 </html>
-

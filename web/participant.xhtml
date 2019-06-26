@@ -1,109 +1,109 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Workshop</title>
-        <h:outputStylesheet library="css" name="main.css" ></h:outputStylesheet>
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
-        <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    </h:head>
-    <h:body>
+    <body>
 
-        <h:form>
+        <ui:composition template="./tmpl.xhtml">
 
-            <p:growl>
-                <p:autoUpdate />
-            </p:growl>
+            <ui:define name="content">
 
-            <div class="w3-row" style="text-align: center;"  >
-                
-                <p:panelGrid columns="2" style="width: 95%; margin: 1% auto;">
-                        <h:outputLabel value="Name:" for="name" styleClass="reg" />
-                        <h:inputText id="name" value="#{institutionController.selectedParcipant.name}" 
-                                      styleClass="reg" />
-                        <h:outputLabel value="Designation:" for="designation" 
-                                        styleClass="reg" 
-                                       />
-                        <h:inputText id="designation" value="#{institutionController.selectedParcipant.designation}" 
-                                     title="Designation"  styleClass="reg" />
-                        <p:outputLabel value="Email:" for="email"  styleClass="reg" />
-                        <p:inputText id="email" value="#{institutionController.selectedParcipant.email}" title="Email" />
-                        <p:outputLabel value="Phone:" for="phone" />
-                        <p:inputText id="phone" value="#{institutionController.selectedParcipant.phone}" title="Phone" />
-                        <p:outputLabel value="Gender:" for="gender" />
-                        <p:selectOneButton id="gender" value="#{institutionController.selectedParcipant.gender}" >
-                            <f:selectItem itemValue="Male" itemLabel="Male" ></f:selectItem>
-                            <f:selectItem itemValue="Female" itemLabel="Female" ></f:selectItem>
-                        </p:selectOneButton>
+
+
+                <h:form>
+
+                    <p:growl>
+                        <p:autoUpdate />
+                    </p:growl>
+
+                    <div class="w3-row" style="text-align: center;"  >
+
+                        <p:panelGrid columns="2" style="width: 95%; margin: 1% auto;">
+                            <h:outputLabel value="Name:" for="name" styleClass="reg" />
+                            <h:inputText id="name" value="#{institutionController.selectedParcipant.name}" 
+                                         styleClass="reg" />
+                            <h:outputLabel value="Designation:" for="designation" 
+                                           styleClass="reg" 
+                                           />
+                            <h:inputText id="designation" value="#{institutionController.selectedParcipant.designation}" 
+                                         title="Designation"  styleClass="reg" />
+                            <p:outputLabel value="Email:" for="email"  styleClass="reg" />
+                            <p:inputText id="email" value="#{institutionController.selectedParcipant.email}" title="Email" />
+                            <p:outputLabel value="Phone:" for="phone" />
+                            <p:inputText id="phone" value="#{institutionController.selectedParcipant.phone}" title="Phone" />
+                            <p:outputLabel value="Gender:" for="gender" />
+                            <p:selectOneButton id="gender" value="#{institutionController.selectedParcipant.gender}" >
+                                <f:selectItem itemValue="Male" itemLabel="Male" ></f:selectItem>
+                                <f:selectItem itemValue="Female" itemLabel="Female" ></f:selectItem>
+                            </p:selectOneButton>
+                        </p:panelGrid>
+
+
+
+                        <h:commandLink value="Update" class="w3-button w3-bar-item" 
+                                       action="#{institutionController.update()}"
+                                       style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
+                        </h:commandLink>
+
+
+                        <p:signature style="width:90%;height:200px;margin: auto;" widgetVar="sig"
+                                     value="#{institutionController.selectedParcipant.signature}" 
+                                     required="true" guideline="true"/>
+
+                        <div style="margin:20px 0">
+                            <p:commandButton value="Submit" icon="pi pi-check" update="output"/>
+                            <p:commandButton value="Clear" icon="pi pi-times" type="button" onclick="PF('sig').clear()"/>
+                        </div>
+
+                        <p:outputPanel id="output">
+                            <h:outputText rendered="#{not empty p.signature}" style="font-size:24px;display:block" value="Your Signature" />
+                            <p:signature style="width:400px;height:200px;" value="#{institutionController.selectedParcipant.signature}" readonly="true"
+                                         rendered="#{not empty p.signature}" backgroundColor="#eaeaea" color="#03a9f4"/>
+                        </p:outputPanel>
+
+
+
+
+
+                        <p:graphicImage   
+                            id="photos" cache="false" styleClass="sideImageResponsive"
+                            rendered="#{imageController.image ne null}"    
+                            value="#{imageController.image}"  >
+
+                        </p:graphicImage>
+
+                        <h:commandLink value="Back" class="w3-button w3-bar-item" action="index"
+                                       style="width: 100%; padding: 2%; ">
+                        </h:commandLink>
+
+                    </div>
+                </h:form>
+
+                <h:form enctype="multipart/form-data">
+                    <p:autoUpdate id="messages" />
+                    <p:panelGrid columns="2" >
+                        <p:photoCam 
+                            widgetVar="pc" 
+                            listener="#{institutionController.oncapture}" 
+                            update="@all" 
+                            width="400"
+                            height="300"
+                            photoWidth="400"
+                            photoHeight="300"
+                            />
+                        <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
                     </p:panelGrid>
+                </h:form> 
 
 
 
-                    <h:commandLink value="Update" class="w3-button w3-bar-item" 
-                                   action="#{institutionController.update()}"
-                                   style="width: 100%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
-                    </h:commandLink>
+            </ui:define>
 
+        </ui:composition>
 
-                <p:signature style="width:90%;height:200px;margin: auto;" widgetVar="sig"
-                             value="#{institutionController.selectedParcipant.signature}" 
-                             required="true" guideline="true"/>
-
-                <div style="margin:20px 0">
-                    <p:commandButton value="Submit" icon="pi pi-check" update="output"/>
-                    <p:commandButton value="Clear" icon="pi pi-times" type="button" onclick="PF('sig').clear()"/>
-                </div>
-
-                <p:outputPanel id="output">
-                    <h:outputText rendered="#{not empty p.signature}" style="font-size:24px;display:block" value="Your Signature" />
-                    <p:signature style="width:400px;height:200px;" value="#{institutionController.selectedParcipant.signature}" readonly="true"
-                                 rendered="#{not empty p.signature}" backgroundColor="#eaeaea" color="#03a9f4"/>
-                </p:outputPanel>
-
-
-
-
-
-                <p:graphicImage   
-                    id="photos" cache="false" styleClass="sideImageResponsive"
-                    rendered="#{imageController.image ne null}"    
-                    value="#{imageController.image}"  >
-
-                </p:graphicImage>
-
-                <h:commandLink value="Back" class="w3-button w3-bar-item" action="index"
-                               style="width: 100%; padding: 2%; ">
-                </h:commandLink>
-
-            </div>
-        </h:form>
-
-        <h:form enctype="multipart/form-data">
-            <p:autoUpdate id="messages" />
-            <p:panelGrid columns="2" >
-                <p:photoCam 
-                    widgetVar="pc" 
-                    listener="#{institutionController.oncapture}" 
-                    update="@all" 
-                    width="400"
-                    height="300"
-                    photoWidth="400"
-                    photoHeight="300"
-                    />
-                <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
-            </p:panelGrid>
-        </h:form>
-
-
-    </h:body>
-
-
-
+    </body>
 </html>
-
