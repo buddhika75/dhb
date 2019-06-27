@@ -93,6 +93,24 @@
                             </f:facet>
                             <h:outputText value="#{item.fileType}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParticipantTitle_roomType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.roomType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParticipantTitle_room}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.room}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListParticipantTitle_group}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.group}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participantController.prepareCreate}" update=":ParticipantCreateForm" oncomplete="PF('ParticipantCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipantViewForm" oncomplete="PF('ParticipantViewDialog').show()" disabled="#{empty participantController.selected}"/>

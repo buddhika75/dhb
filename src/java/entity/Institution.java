@@ -68,7 +68,7 @@ public class Institution implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Institution[ id=" + id + " ]";
+        return name;
     }
 
     public String getName() {

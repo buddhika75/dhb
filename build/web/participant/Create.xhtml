@@ -38,6 +38,20 @@
                         <p:inputText id="fileName" value="#{participantController.selected.fileName}" title="#{bundle.CreateParticipantTitle_fileName}" />
                         <p:outputLabel value="#{bundle.CreateParticipantLabel_fileType}" for="fileType" />
                         <p:inputText id="fileType" value="#{participantController.selected.fileType}" title="#{bundle.CreateParticipantTitle_fileType}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_roomType}" for="roomType" />
+                        <p:inputText id="roomType" value="#{participantController.selected.roomType}" title="#{bundle.CreateParticipantTitle_roomType}" />
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_room}" for="room" />
+                        <p:selectOneMenu id="room" value="#{participantController.selected.room}" >
+                            <f:selectItems value="#{roomController.itemsAvailableSelectOne}"
+                                           var="roomItem"
+                                           itemValue="#{roomItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateParticipantLabel_group}" for="group" />
+                        <p:selectOneMenu id="group" value="#{participantController.selected.group}" >
+                            <f:selectItems value="#{groupController.itemsAvailableSelectOne}"
+                                           var="groupItem"
+                                           itemValue="#{groupItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{participantController.create}" value="#{bundle.Save}" update="display,:ParticipantListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipantCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantCreateDialog.hide()"/>

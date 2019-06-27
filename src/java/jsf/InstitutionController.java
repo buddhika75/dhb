@@ -68,7 +68,7 @@ public class InstitutionController implements Serializable {
         if(ta==null && createNew){
             ta = new Institution();
             ta.setName(name);
-            ta.setCategory(category);
+            ta.setCategory(cat);
             getFacade().create(ta);
         }
         return ta;

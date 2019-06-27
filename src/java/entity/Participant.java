@@ -39,6 +39,11 @@ public class Participant implements Serializable {
     private Gender gender;
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
+    
+    @ManyToOne
+    private Room room;
+    @ManyToOne
+    private Group group;
 
     private boolean firstDay=true;
     private boolean secondDay=true;
@@ -92,7 +97,7 @@ public class Participant implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Participant[ id=" + id + " ]";
+        return name;
     }
 
     public String getName() {
@@ -206,7 +211,24 @@ public class Participant implements Serializable {
     public void setOvernightStay(boolean overnightStay) {
         this.overnightStay = overnightStay;
     }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
     
 
+    
 
 }

@@ -71,6 +71,7 @@ public class ParticipantController implements Serializable {
     
     
     
+    
     public String importProjectsFromExcel() {
         String strCat;
         String strIns;
@@ -132,6 +133,14 @@ public class ParticipantController implements Serializable {
                 ins = institutionController.getInstitution(strIns, category, true);
                 
                 Participant np = ins.getParticipants().get(0);
+                
+                if(np.getName()==null || np.getName().trim().equals("")){
+                    
+                }else{
+                    np = new Participant();
+                    np.setInstitution(ins);
+                    ins.getParticipants().add(np);
+                }
                 
                 cell = sheet.getCell(2, i);
                 strName = cell.getContents();
@@ -276,6 +285,10 @@ public class ParticipantController implements Serializable {
 
     public List<Participant> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 
     @FacesConverter(forClass = Participant.class)

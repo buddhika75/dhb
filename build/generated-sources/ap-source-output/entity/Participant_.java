@@ -1,13 +1,15 @@
 package entity;
 
 import entity.Gender;
+import entity.Group;
 import entity.Institution;
+import entity.Room;
 import entity.RoomType;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-27T05:17:08")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-27T07:19:35")
 @StaticMetamodel(Participant.class)
 public class Participant_ { 
 
@@ -15,6 +17,7 @@ public class Participant_ {
     public static volatile SingularAttribute<Participant, Gender> gender;
     public static volatile SingularAttribute<Participant, String> signature;
     public static volatile SingularAttribute<Participant, Boolean> secondDay;
+    public static volatile SingularAttribute<Participant, Room> room;
     public static volatile SingularAttribute<Participant, Institution> institution;
     public static volatile SingularAttribute<Participant, Boolean> firstDay;
     public static volatile SingularAttribute<Participant, String> phone;
@@ -26,5 +29,6 @@ public class Participant_ {
     public static volatile SingularAttribute<Participant, String> email;
     public static volatile SingularAttribute<Participant, RoomType> roomType;
     public static volatile SingularAttribute<Participant, String> fileType;
+    public static volatile SingularAttribute<Participant, Group> group;
 
 }
