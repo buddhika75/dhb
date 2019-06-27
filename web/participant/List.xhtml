@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                       
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_name}"/>
@@ -67,32 +62,37 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_institution}"/>
                             </f:facet>
-                            <h:outputText value="#{item.institution}"/>
+                            <h:outputText value="#{item.institution.name}"/>
                         </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_signature}"/>
+                                <h:outputText value="Day 1"/>
                             </f:facet>
-                            <h:outputText value="#{item.signature}"/>
+                            <h:outputText value="#{item.firstDay?'Present':''}"/>
                         </p:column>
+                        
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Day 2"/>
+                            </f:facet>
+                             <h:outputText value="#{item.secondDay?'Present':''}"/>
+                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_baImage}"/>
+                                <h:outputText value="Overnight Stay"/>
                             </f:facet>
-                            <h:outputText value="#{item.baImage}"/>
+                            <h:outputText value="#{item.overnightStay ?'Yes':'No'}"/>
                         </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_fileName}"/>
+                                <h:outputText value="#{bundle.ListParticipantTitle_group}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fileName}"/>
+                            <h:outputText value="#{item.group}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_fileType}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fileType}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_roomType}"/>
@@ -103,7 +103,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_room}"/>
                             </f:facet>
-                            <h:outputText value="#{item.room}"/>
+                            <h:outputText value="#{item.room.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

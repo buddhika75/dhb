@@ -28,7 +28,9 @@ public class Group implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    String name;
+    private String name;
+    
+    
     
     
     public Long getId() {
@@ -62,6 +64,22 @@ public class Group implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
     
 }

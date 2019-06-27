@@ -45,8 +45,8 @@ public class Participant implements Serializable {
     @ManyToOne
     private Group group;
 
-    private boolean firstDay=true;
-    private boolean secondDay=true;
+    private boolean firstDay=false;
+    private boolean secondDay=false;
     private boolean overnightStay=true;
     
     
