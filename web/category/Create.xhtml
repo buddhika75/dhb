@@ -8,21 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="CategoryCreateDlg" widgetVar="CategoryCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCategoryTitle}">
+        <p:dialog id="CategoryCreateDlg" widgetVar="CategoryCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="Create">
             <h:form id="CategoryCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateCategoryLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{categoryController.selected.id}" title="#{bundle.CreateCategoryTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateCategoryLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{categoryController.selected.name}" title="#{bundle.CreateCategoryTitle_name}" />
-                        <p:outputLabel value="#{bundle.CreateCategoryLabel_backgoundColour}" for="backgoundColour" />
-                        <p:inputText id="backgoundColour" value="#{categoryController.selected.backgoundColour}" title="#{bundle.CreateCategoryTitle_backgoundColour}" />
-                        <p:outputLabel value="#{bundle.CreateCategoryLabel_foregroundColour}" for="foregroundColour" />
-                        <p:inputText id="foregroundColour" value="#{categoryController.selected.foregroundColour}" title="#{bundle.CreateCategoryTitle_foregroundColour}" />
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{categoryController.selected.name}" 
+                                     title="Name" />
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{categoryController.create}" value="#{bundle.Save}" update="display,:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(args,'CategoryCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CategoryCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{categoryController.create}" value="Save" update="display,:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(args,'CategoryCreateDialog');"/>
+                    <p:commandButton value="Cancel" onclick="CategoryCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

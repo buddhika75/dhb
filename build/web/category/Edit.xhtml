@@ -8,19 +8,13 @@
 
     <ui:composition>
 
-        <p:dialog id="CategoryEditDlg" widgetVar="CategoryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCategoryTitle}">
+        <p:dialog id="CategoryEditDlg" widgetVar="CategoryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Edit Category">
             <h:form id="CategoryEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditCategoryLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{categoryController.selected.id}" title="#{bundle.EditCategoryTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditCategoryLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{categoryController.selected.name}" title="#{bundle.EditCategoryTitle_name}" />
-                        <p:outputLabel value="#{bundle.EditCategoryLabel_backgoundColour}" for="backgoundColour" />
-                        <p:inputText id="backgoundColour" value="#{categoryController.selected.backgoundColour}" title="#{bundle.EditCategoryTitle_backgoundColour}" />
-                        <p:outputLabel value="#{bundle.EditCategoryLabel_foregroundColour}" for="foregroundColour" />
-                        <p:inputText id="foregroundColour" value="#{categoryController.selected.foregroundColour}" title="#{bundle.EditCategoryTitle_foregroundColour}" />
-                    </p:panelGrid>
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{categoryController.selected.name}" 
+                                     title="Name" /></p:panelGrid>
                     <p:commandButton actionListener="#{categoryController.update}" value="#{bundle.Save}" update="display,:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CategoryEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CategoryEditDialog.hide()"/>
                 </h:panelGroup>

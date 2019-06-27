@@ -12,16 +12,11 @@
             <h:form id="InstitutionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{institutionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewInstitutionLabel_id}"/>
-                        <h:outputText value="#{institutionController.selected.id}" title="#{bundle.ViewInstitutionTitle_id}"/>
                         <h:outputText value="#{bundle.ViewInstitutionLabel_name}"/>
                         <h:outputText value="#{institutionController.selected.name}" title="#{bundle.ViewInstitutionTitle_name}"/>
                         <h:outputText value="#{bundle.ViewInstitutionLabel_category}"/>
                         <h:outputText value="#{institutionController.selected.category}" title="#{bundle.ViewInstitutionTitle_category}"/>
-                        <h:outputText value="#{bundle.ViewInstitutionLabel_backgoundColour}"/>
-                        <h:outputText value="#{institutionController.selected.backgoundColour}" title="#{bundle.ViewInstitutionTitle_backgoundColour}"/>
-                        <h:outputText value="#{bundle.ViewInstitutionLabel_foregroundColour}"/>
-                        <h:outputText value="#{institutionController.selected.foregroundColour}" title="#{bundle.ViewInstitutionTitle_foregroundColour}"/>
+                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="InstitutionViewDialog.hide()"/>
                 </h:panelGroup>

@@ -12,8 +12,6 @@
             <h:form id="InstitutionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{institutionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateInstitutionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{institutionController.selected.id}" title="#{bundle.CreateInstitutionTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateInstitutionLabel_name}" for="name" />
                         <p:inputText id="name" value="#{institutionController.selected.name}" title="#{bundle.CreateInstitutionTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateInstitutionLabel_category}" for="category" />
@@ -22,10 +20,7 @@
                                            var="categoryItem"
                                            itemValue="#{categoryItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateInstitutionLabel_backgoundColour}" for="backgoundColour" />
-                        <p:inputText id="backgoundColour" value="#{institutionController.selected.backgoundColour}" title="#{bundle.CreateInstitutionTitle_backgoundColour}" />
-                        <p:outputLabel value="#{bundle.CreateInstitutionLabel_foregroundColour}" for="foregroundColour" />
-                        <p:inputText id="foregroundColour" value="#{institutionController.selected.foregroundColour}" title="#{bundle.CreateInstitutionTitle_foregroundColour}" />
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{institutionController.create}" value="#{bundle.Save}" update="display,:InstitutionListForm:datalist,:growl" oncomplete="handleSubmit(args,'InstitutionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InstitutionCreateDialog.hide()"/>

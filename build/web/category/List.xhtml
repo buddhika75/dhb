@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListCategoryTitle}"></h:outputText>
+            <h:outputText value="Categories"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="CategoryListForm">
-                <p:panel header="#{bundle.ListCategoryTitle}">
+                <p:panel header="Categories">
                     <p:dataTable id="datalist" value="#{categoryController.items}" var="item"
                                  selectionMode="single" selection="#{categoryController.selected}"
                                  paginator="true"
@@ -27,30 +27,14 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
+                       
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_name}"/>
+                                <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.name}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_backgoundColour}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.backgoundColour}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCategoryTitle_foregroundColour}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.foregroundColour}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{categoryController.prepareCreate}" update=":CategoryCreateForm" oncomplete="PF('CategoryCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CategoryViewForm" oncomplete="PF('CategoryViewDialog').show()" disabled="#{empty categoryController.selected}"/>

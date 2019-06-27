@@ -12,8 +12,6 @@
             <h:form id="InstitutionEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{institutionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditInstitutionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{institutionController.selected.id}" title="#{bundle.EditInstitutionTitle_id}" />
                         <p:outputLabel value="#{bundle.EditInstitutionLabel_name}" for="name" />
                         <p:inputText id="name" value="#{institutionController.selected.name}" title="#{bundle.EditInstitutionTitle_name}" />
                         <p:outputLabel value="#{bundle.EditInstitutionLabel_category}" for="category" />
@@ -23,10 +21,7 @@
                                            var="categoryItem"
                                            itemValue="#{categoryItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditInstitutionLabel_backgoundColour}" for="backgoundColour" />
-                        <p:inputText id="backgoundColour" value="#{institutionController.selected.backgoundColour}" title="#{bundle.EditInstitutionTitle_backgoundColour}" />
-                        <p:outputLabel value="#{bundle.EditInstitutionLabel_foregroundColour}" for="foregroundColour" />
-                        <p:inputText id="foregroundColour" value="#{institutionController.selected.foregroundColour}" title="#{bundle.EditInstitutionTitle_foregroundColour}" />
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{institutionController.update}" value="#{bundle.Save}" update="display,:InstitutionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InstitutionEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InstitutionEditDialog.hide()"/>

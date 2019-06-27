@@ -8,18 +8,13 @@
 
     <ui:composition>
 
-        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCategoryTitle}">
+        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="View Category">
             <h:form id="CategoryViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCategoryLabel_id}"/>
-                        <h:outputText value="#{categoryController.selected.id}" title="#{bundle.ViewCategoryTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewCategoryLabel_name}"/>
-                        <h:outputText value="#{categoryController.selected.name}" title="#{bundle.ViewCategoryTitle_name}"/>
-                        <h:outputText value="#{bundle.ViewCategoryLabel_backgoundColour}"/>
-                        <h:outputText value="#{categoryController.selected.backgoundColour}" title="#{bundle.ViewCategoryTitle_backgoundColour}"/>
-                        <h:outputText value="#{bundle.ViewCategoryLabel_foregroundColour}"/>
-                        <h:outputText value="#{categoryController.selected.foregroundColour}" title="#{bundle.ViewCategoryTitle_foregroundColour}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{categoryController.selected.name}" title="Name"/>
+                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CategoryViewDialog.hide()"/>
                 </h:panelGroup>
