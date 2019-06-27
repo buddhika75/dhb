@@ -1,6 +1,6 @@
 package jsf;
 
-import entity.Group;
+import entity.WorkGroup;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
 import bean.GroupFacade;
@@ -25,17 +25,17 @@ public class GroupController implements Serializable {
 
     @EJB
     private bean.GroupFacade ejbFacade;
-    private List<Group> items = null;
-    private Group selected;
+    private List<WorkGroup> items = null;
+    private WorkGroup selected;
 
     public GroupController() {
     }
 
-    public Group getSelected() {
+    public WorkGroup getSelected() {
         return selected;
     }
 
-    public void setSelected(Group selected) {
+    public void setSelected(WorkGroup selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class GroupController implements Serializable {
         return ejbFacade;
     }
 
-    public Group prepareCreate() {
-        selected = new Group();
+    public WorkGroup prepareCreate() {
+        selected = new WorkGroup();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class GroupController implements Serializable {
         }
     }
 
-    public List<Group> getItems() {
+    public List<WorkGroup> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class GroupController implements Serializable {
         }
     }
 
-    public Group getGroup(java.lang.Long id) {
+    public WorkGroup getGroup(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Group> getItemsAvailableSelectMany() {
+    public List<WorkGroup> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Group> getItemsAvailableSelectOne() {
+    public List<WorkGroup> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Group.class)
+    @FacesConverter(forClass = WorkGroup.class)
     public static class GroupControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class GroupController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Group) {
-                Group o = (Group) object;
+            if (object instanceof WorkGroup) {
+                WorkGroup o = (WorkGroup) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Group.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), WorkGroup.class.getName()});
                 return null;
             }
         }

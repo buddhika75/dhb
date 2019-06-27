@@ -12,12 +12,12 @@
             <h:form id="RoomCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{roomController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{roomController.selected.id}" title="#{bundle.CreateRoomTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateRoomLabel_name}" for="name" />
                         <p:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.CreateRoomTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateRoomLabel_roomType}" for="roomType" />
-                        <p:inputText id="roomType" value="#{roomController.selected.roomType}" title="#{bundle.CreateRoomTitle_roomType}" />
+                        <p:selectOneMenu id="roomType" value="#{roomController.selected.roomType}" title="#{bundle.CreateRoomTitle_roomType}" >
+                            <f:selectItems value="" ></f:selectItems>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{roomController.create}" value="#{bundle.Save}" update="display,:RoomListForm:datalist,:growl" oncomplete="handleSubmit(args,'RoomCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RoomCreateDialog.hide()"/>

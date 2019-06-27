@@ -5,7 +5,7 @@
  */
 package bean;
 
-import entity.Group;
+import entity.WorkGroup;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author divudi_lk
  */
 @Stateless
-public class GroupFacade extends AbstractFacade<Group> {
+public class GroupFacade extends AbstractFacade<WorkGroup> {
 
     @PersistenceContext(unitName = "pu")
     private EntityManager em;
@@ -26,7 +26,7 @@ public class GroupFacade extends AbstractFacade<Group> {
     }
 
     public GroupFacade() {
-        super(Group.class);
+        super(WorkGroup.class);
     }
     
 }

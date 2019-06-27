@@ -43,7 +43,7 @@ public class Participant implements Serializable {
     @ManyToOne
     private Room room;
     @ManyToOne
-    private Group group;
+    private WorkGroup workgroup;
 
     private boolean firstDay=false;
     private boolean secondDay=false;
@@ -220,12 +220,12 @@ public class Participant implements Serializable {
         this.room = room;
     }
 
-    public Group getGroup() {
-        return group;
+    public WorkGroup getWorkgroup() {
+        return workgroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setWorkgroup(WorkGroup workgroup) {
+        this.workgroup = workgroup;
     }
     
 

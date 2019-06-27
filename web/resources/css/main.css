@@ -32,3 +32,8 @@
     font-size: 3em; 
     text-align: center;
 }
+
+.centeredCol{
+    vertical-align: top;
+    text-align: center;
+}

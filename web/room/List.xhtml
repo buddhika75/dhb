@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRoomTitle_name}"/>
@@ -44,6 +39,13 @@
                                 <h:outputText value="#{bundle.ListRoomTitle_roomType}"/>
                             </f:facet>
                             <h:outputText value="#{item.roomType}"/>
+                        </p:column>
+                        <p:column headerText="Occupants">
+                            <ui:repeat value="#{item.participants}" var="p" >
+                                <h:commandLink value="#{p.name}" action="edit_participant" >
+                                    <f:setPropertyActionListener value="#{p}" target="#{participantController.selected}" ></f:setPropertyActionListener>
+                                </h:commandLink>
+                            </ui:repeat>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{roomController.prepareCreate}" update=":RoomCreateForm" oncomplete="PF('RoomCreateDialog').show()"/>

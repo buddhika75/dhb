@@ -12,8 +12,8 @@
             <h:form id="GroupCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{groupController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateGroupLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{groupController.selected.id}" title="#{bundle.CreateGroupTitle_id}" />
+                        <p:outputLabel value="Name" for="id" />
+                        <p:inputText id="id" value="#{groupController.selected.name}" title="Name" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{groupController.create}" value="#{bundle.Save}" update="display,:GroupListForm:datalist,:growl" oncomplete="handleSubmit(args,'GroupCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="GroupCreateDialog.hide()"/>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="body">
+                <p:panel id="display" header="Edit Participant">
+                    <p:panelGrid columns="2" rendered="#{participantController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.EditParticipantTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{participantController.selected.designation}" title="#{bundle.EditParticipantTitle_designation}" />
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{participantController.selected.email}" title="#{bundle.EditParticipantTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{participantController.selected.phone}" title="#{bundle.EditParticipantTitle_phone}" />
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_gender}" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{participantController.selected.gender}" 
+                                         title="#{bundle.CreateParticipantTitle_gender}" >
+                            <f:selectItems value="#{enumController.gender}" ></f:selectItems>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_institution}" for="institution" />
+                        <p:selectOneMenu id="institution" value="#{participantController.selected.institution}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{institutionController.itemsAvailableSelectOne}"
+                                           var="institutionItem"
+                                           itemValue="#{institutionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_roomType}" for="roomType" />
+                        <p:selectOneMenu id="roomType" value="#{participantController.selected.roomType}" 
+                                         title="#{bundle.EditParticipantTitle_roomType}" >
+                            <f:selectItems value="#{enumController.roomTypes}" ></f:selectItems>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_room}" for="room" />
+                        <p:selectOneMenu id="room" value="#{participantController.selected.room}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{roomController.itemsAvailableSelectOne}"
+                                           var="roomItem"
+                                           itemValue="#{roomItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipantLabel_group}" for="group" />
+                        <p:selectOneMenu id="group" value="#{participantController.selected.workgroup}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{groupController.itemsAvailableSelectOne}"
+                                           var="groupItem"
+                                           itemValue="#{groupItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{participantController.update}" value="#{bundle.Save}" update="display,:ParticipantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParticipantEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantEditDialog.hide()"/>
+                </h:panelGroup>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

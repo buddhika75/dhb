@@ -28,37 +28,37 @@
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
                        
-                        <p:column>
+                        <p:column  sortBy="#{item.name}" filterBy="#{item.name}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_name}"/>
                             </f:facet>
                             <h:outputText value="#{item.name}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  sortBy="#{item.designation}" filterBy="#{item.designation}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_designation}"/>
                             </f:facet>
                             <h:outputText value="#{item.designation}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  sortBy="#{item.email}" filterBy="#{item.email}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  sortBy="#{item.phone}" filterBy="#{item.phone}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_phone}"/>
                             </f:facet>
                             <h:outputText value="#{item.phone}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.gender}" filterBy="#{item.gender}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_gender}"/>
                             </f:facet>
                             <h:outputText value="#{item.gender}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.institution.name}" filterBy="#{item.institution.name}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_institution}"/>
                             </f:facet>
@@ -88,13 +88,6 @@
                         
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_group}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.group}"/>
-                        </p:column>
-                        
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_roomType}"/>
                             </f:facet>
                             <h:outputText value="#{item.roomType}"/>
@@ -109,7 +102,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_group}"/>
                             </f:facet>
-                            <h:outputText value="#{item.group}"/>
+                            <h:outputText value="#{item.workgroup.name}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participantController.prepareCreate}" update=":ParticipantCreateForm" oncomplete="PF('ParticipantCreateDialog').show()"/>

@@ -109,8 +109,8 @@ public class InstitutionController implements Serializable {
         }
     }
 
-    public void oncapture(CaptureEvent captureEvent) {
-        if (selected == null) {
+    public void capturePhoto(CaptureEvent captureEvent) {
+        if (selectedParcipant == null) {
             return;
         }
         try {
@@ -118,9 +118,61 @@ public class InstitutionController implements Serializable {
             getSelectedParcipant().setFileType("image/jpeg");
             getSelectedParcipant().setBaImage(captureEvent.getData());
             getFacade().edit(selected);
+            JsfUtil.addSuccessMessage("Photo Captured. Click Next");
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
         }
+    }
+
+   
+
+    public void clearPhoto() {
+        if (selectedParcipant == null) {
+            return;
+        }
+
+        selectedParcipant.setBaImage(null);
+        update();
+    }
+
+    public void clearSignature() {
+        if (selectedParcipant == null) {
+            return;
+        }
+        selectedParcipant.setSignature(null);
+        update();
+    }
+    
+     public void registerForDayOne() {
+        if (selectedParcipant == null) {
+            return;
+        }
+        selectedParcipant.setFirstDay(true);
+        update();
+    }
+     
+     public void registerForDayTwo() {
+        if (selectedParcipant == null) {
+            return;
+        }
+        selectedParcipant.setSecondDay(true);
+        update();
+    }
+
+    public String updateAndToPhoto() {
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Details Updated. Take a Photo Now. Let few seconds to transfer the photo. Then Click Next.");
+        return "participant_photo";
+    }
+
+    public String updateAndToSignature() {
+        update();
+        return "participant_signature";
+    }
+
+    public String updateAndToRegister() {
+        update();
+        return "participant_register";
     }
 
     public String saveOrUpdate() {
@@ -150,6 +202,8 @@ public class InstitutionController implements Serializable {
         return "";
     }
 
+    
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InstitutionUpdated"));
     }
@@ -240,8 +294,6 @@ public class InstitutionController implements Serializable {
     public void setSelectedParcipant(Participant selectedParcipant) {
         this.selectedParcipant = selectedParcipant;
     }
-
-   
 
     @FacesConverter(forClass = Institution.class)
     public static class InstitutionControllerConverter implements Converter {

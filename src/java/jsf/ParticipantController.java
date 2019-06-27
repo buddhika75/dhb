@@ -43,15 +43,15 @@ public class ParticipantController implements Serializable {
 
     @EJB
     private bean.ParticipantFacade ejbFacade;
-    
+
     @Inject
     CategoryController categoryController;
     @Inject
     InstitutionController institutionController;
-    
+
     private List<Participant> items = null;
     private Participant selected;
-    
+
     private UploadedFile file;
 
     public ParticipantController() {
@@ -68,10 +68,7 @@ public class ParticipantController implements Serializable {
     public UploadedFile getFile() {
         return file;
     }
-    
-    
-    
-    
+
     public String importProjectsFromExcel() {
         String strCat;
         String strIns;
@@ -83,10 +80,9 @@ public class ParticipantController implements Serializable {
         String strRoomType;
         String strStay;
 
-       
         Institution ins;
         Category category;
-        
+
         File inputWorkbook;
         Workbook w;
         Cell cell;
@@ -119,8 +115,6 @@ public class ParticipantController implements Serializable {
 
             for (int i = startRow; i < sheet.getRows(); i++) {
 
-                
-
                 Map m = new HashMap();
 
                 //Category
@@ -131,17 +125,17 @@ public class ParticipantController implements Serializable {
                 cell = sheet.getCell(1, i);
                 strIns = cell.getContents();
                 ins = institutionController.getInstitution(strIns, category, true);
-                
+
                 Participant np = ins.getParticipants().get(0);
-                
-                if(np.getName()==null || np.getName().trim().equals("")){
-                    
-                }else{
+
+                if (np.getName() == null || np.getName().trim().equals("")) {
+
+                } else {
                     np = new Participant();
                     np.setInstitution(ins);
                     ins.getParticipants().add(np);
                 }
-                
+
                 cell = sheet.getCell(2, i);
                 strName = cell.getContents();
                 np.setName(strName);
@@ -160,28 +154,28 @@ public class ParticipantController implements Serializable {
 
                 cell = sheet.getCell(6, i);
                 strGender = cell.getContents();
-                if(strGender.equalsIgnoreCase("Female")){
+                if (strGender.equalsIgnoreCase("Female")) {
                     np.setGender(Gender.Female);
-                }else{
+                } else {
                     np.setGender(Gender.Male);
                 }
-                
+
                 cell = sheet.getCell(7, i);
                 strRoomType = cell.getContents();
-                if(strRoomType.equalsIgnoreCase("Double")){
+                if (strRoomType.equalsIgnoreCase("Double")) {
                     np.setRoomType(RoomType.Double);
-                }else{
+                } else {
                     np.setRoomType(RoomType.Single);
                 }
-                
+
                 cell = sheet.getCell(7, i);
                 strStay = cell.getContents();
-                if(strStay.equalsIgnoreCase("Yes")){
+                if (strStay.equalsIgnoreCase("Yes")) {
                     np.setOvernightStay(true);
-                }else{
+                } else {
                     np.setOvernightStay(false);
                 }
-                
+
                 institutionController.saveOrUpdate(ins);
 
             }
@@ -225,8 +219,11 @@ public class ParticipantController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipantCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            selected.getInstitution().getParticipants().add(selected);
         }
     }
+
+   
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ParticipantUpdated"));

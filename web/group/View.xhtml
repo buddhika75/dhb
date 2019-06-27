@@ -12,8 +12,8 @@
             <h:form id="GroupViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{groupController.selected != null}">
-                        <h:outputText value="#{bundle.ViewGroupLabel_id}"/>
-                        <h:outputText value="#{groupController.selected.id}" title="#{bundle.ViewGroupTitle_id}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{groupController.selected.name}" title="Name"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="GroupViewDialog.hide()"/>
                 </h:panelGroup>

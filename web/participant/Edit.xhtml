@@ -21,7 +21,10 @@
                         <p:outputLabel value="#{bundle.EditParticipantLabel_phone}" for="phone" />
                         <p:inputText id="phone" value="#{participantController.selected.phone}" title="#{bundle.EditParticipantTitle_phone}" />
                         <p:outputLabel value="#{bundle.EditParticipantLabel_gender}" for="gender" />
-                        <p:inputText id="gender" value="#{participantController.selected.gender}" title="#{bundle.EditParticipantTitle_gender}" />
+                        <p:selectOneMenu id="gender" value="#{participantController.selected.gender}" 
+                                         title="#{bundle.CreateParticipantTitle_gender}" >
+                            <f:selectItems value="#{enumController.gender}" ></f:selectItems>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditParticipantLabel_institution}" for="institution" />
                         <p:selectOneMenu id="institution" value="#{participantController.selected.institution}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -30,7 +33,10 @@
                                            itemValue="#{institutionItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditParticipantLabel_roomType}" for="roomType" />
-                        <p:inputText id="roomType" value="#{participantController.selected.roomType}" title="#{bundle.EditParticipantTitle_roomType}" />
+                        <p:selectOneMenu id="roomType" value="#{participantController.selected.roomType}" 
+                                         title="#{bundle.EditParticipantTitle_roomType}" >
+                            <f:selectItems value="#{enumController.roomTypes}" ></f:selectItems>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditParticipantLabel_room}" for="room" />
                         <p:selectOneMenu id="room" value="#{participantController.selected.room}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -39,7 +45,7 @@
                                            itemValue="#{roomItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditParticipantLabel_group}" for="group" />
-                        <p:selectOneMenu id="group" value="#{participantController.selected.group}" >
+                        <p:selectOneMenu id="group" value="#{participantController.selected.workgroup}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{groupController.itemsAvailableSelectOne}"
                                            var="groupItem"
