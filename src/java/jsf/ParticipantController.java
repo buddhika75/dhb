@@ -159,22 +159,24 @@ public class ParticipantController implements Serializable {
                 } else {
                     np.setGender(Gender.Male);
                 }
-
-                cell = sheet.getCell(7, i);
-                strRoomType = cell.getContents();
-                if (strRoomType.equalsIgnoreCase("Double")) {
-                    np.setRoomType(RoomType.Double);
-                } else {
-                    np.setRoomType(RoomType.Single);
-                }
-
+                
                 cell = sheet.getCell(7, i);
                 strStay = cell.getContents();
                 if (strStay.equalsIgnoreCase("Yes")) {
                     np.setOvernightStay(true);
-                } else {
+                } else if (strStay.equalsIgnoreCase("No")) {
                     np.setOvernightStay(false);
                 }
+
+                cell = sheet.getCell(8, i);
+                strRoomType = cell.getContents();
+                if (strRoomType.equalsIgnoreCase("Double")) {
+                    np.setRoomType(RoomType.Double);
+                } else if (strRoomType.equalsIgnoreCase("Single")){
+                    np.setRoomType(RoomType.Single);
+                }
+
+                
 
                 institutionController.saveOrUpdate(ins);
 
