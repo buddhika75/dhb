@@ -15,6 +15,13 @@
     text-align: center;
 }
 
+.filler{
+    text-align: center;
+    font-family: 'Passion One', cursive;
+    font-size: 2em; 
+    text-align: center;
+}
+
 .header{
     left:0;
     top: 0;

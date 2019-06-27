@@ -11,10 +11,10 @@
 
             <ui:define name="content">
                 <h:form>
-                    <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 3em; text-align: center;" >
+                    <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 2em; text-align: center;" >
 
                         <ui:repeat value="#{categoryController.items}" var="c" >
-                            <div class="w3-col m4 l3 w3-padding" >
+                            <div class="w3-col s12 m6 l4 w3-padding" >
 
                                 <h:commandLink value="#{c.name}" class="w3-button w3-bar-item w3-deep-orange w3-round-large" action="institution"
                                                style="width: 80%;">
@@ -30,14 +30,7 @@
 
         </ui:composition>
 
-        <br />
-        <h:link outcome="/group/List" value="Show All Group Items"/>
-        <br />
-        <h:link outcome="/institution/List" value="Show All Institution Items"/>
-        <br />
-        <h:link outcome="/participant/List" value="Show All Participant Items"/>
-        <br />
-        <h:link outcome="/room/List" value="Show All Room Items"/>
+       
     </body>
 
 
