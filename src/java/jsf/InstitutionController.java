@@ -35,8 +35,21 @@ public class InstitutionController implements Serializable {
     private List<Institution> categoryItems = null;
     private Institution selected;
     private Category category;
-    private int selectedParticipantIndex;
     private Participant selectedParcipant;
+
+    public String toParticipant() {
+        if (selected == null) {
+            return "";
+        }
+        if (selected.getParticipants().size() > 1) {
+            selectedParcipant = null;
+            return "participants";
+        } else {
+
+            selectedParcipant = selected.getParticipants().get(0);
+            return "participant";
+        }
+    }
 
     public InstitutionController() {
     }
@@ -49,9 +62,8 @@ public class InstitutionController implements Serializable {
         this.selected = selected;
     }
 
-    
     public Institution getInstitution(String name, Category cat, boolean createNew) {
-        if(name.trim().equals("")){
+        if (name.trim().equals("")) {
             return null;
         }
         String j;
@@ -60,12 +72,12 @@ public class InstitutionController implements Serializable {
                 + " from Institution a "
                 + " where (upper(a.name) =:n) and a.category=:c ";
         m.put("n", name.toUpperCase());
-         m.put("c", cat);
+        m.put("c", cat);
         j += " order by a.name";
         System.out.println("m = " + m);
         System.out.println("j = " + j);
         Institution ta = getFacade().findFirstBySQL(j, m);
-        if(ta==null && createNew){
+        if (ta == null && createNew) {
             ta = new Institution();
             ta.setName(name);
             ta.setCategory(cat);
@@ -73,7 +85,7 @@ public class InstitutionController implements Serializable {
         }
         return ta;
     }
-    
+
     protected void setEmbeddableKeys() {
     }
 
@@ -126,7 +138,6 @@ public class InstitutionController implements Serializable {
         return "";
     }
 
-    
     public String saveOrUpdate(Institution ins) {
         if (ins == null) {
             return "";
@@ -138,7 +149,7 @@ public class InstitutionController implements Serializable {
         }
         return "";
     }
-    
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InstitutionUpdated"));
     }
@@ -218,37 +229,19 @@ public class InstitutionController implements Serializable {
         this.categoryItems = categoryItems;
     }
 
-    public int getSelectedParticipantIndex() {
-        return selectedParticipantIndex;
-    }
-
-    public void setSelectedParticipantIndex(int selectedParticipantIndex) {
-        this.selectedParticipantIndex = selectedParticipantIndex;
+    public void addNewParticipant() {
+        getSelectedParcipant();
     }
 
     public Participant getSelectedParcipant() {
-        if (selected == null) {
-            selectedParcipant = null;
-        }
-        if (selectedParticipantIndex < getSelected().getParticipants().size()) {
-            selectedParcipant = getSelected().getParticipants().get(selectedParticipantIndex);
-        }else{
-            Participant p = new Participant();
-            p.setInstitution(selected);
-            getSelected().getParticipants().add(p);
-            selectedParticipantIndex = getSelected().getParticipants().size()-1;
-        }
         return selectedParcipant;
-    }
-    
-    public void addNewParticipant(){
-        selectedParticipantIndex++;
-        getSelectedParcipant();
     }
 
     public void setSelectedParcipant(Participant selectedParcipant) {
         this.selectedParcipant = selectedParcipant;
     }
+
+   
 
     @FacesConverter(forClass = Institution.class)
     public static class InstitutionControllerConverter implements Converter {

@@ -1,5 +1,6 @@
 .reg{
-    font-family: 'Passion One', cursive; 
+    font-family: 'Passion One', cursive!important; 
+    font-weight: normal!important;
     font-size: 2em!important;
     width: 95%;
 }
