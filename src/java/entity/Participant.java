@@ -5,7 +5,10 @@
  */
 package entity;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +20,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -29,8 +35,7 @@ public class Participant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
+
     private String name;
     private String designation;
     private String email;
@@ -39,34 +44,52 @@ public class Participant implements Serializable {
     private Gender gender;
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
-    
+
     @ManyToOne
     private Room room;
     @ManyToOne
     private WorkGroup workgroup;
 
-    private boolean firstDay=false;
-    private boolean secondDay=false;
-    private boolean overnightStay=true;
-    
-    
-    
+    private boolean firstDay = false;
+    private boolean secondDay = false;
+    private boolean overnightStay = true;
+
+    @Transient
+    private boolean male;
+
     @ManyToOne
     private Institution institution;
-    
+
     @Lob
     private String signature;
-    
+
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     @Basic(fetch = FetchType.LAZY)
     private byte[] baImage;
     private String fileName;
     private String fileType;
-    
-    
-    
-    
+
+    @Transient
+    StreamedContent image;
+
+    public StreamedContent getImage() {
+        System.out.println("this = " + this);
+        if(this.getBaImage()==null){
+            image = null;
+            System.out.println("null baImage");
+            return image;
+        }
+        try {
+            image = new DefaultStreamedContent(new ByteArrayInputStream(this.getBaImage()), this.getFileType(), this.getFileName());
+            System.out.println("image");
+        } catch (Exception e) {
+            image = new DefaultStreamedContent();
+            System.out.println("error ");
+        }
+        return image;
+    }
+
     public Long getId() {
         return id;
     }
@@ -227,8 +250,14 @@ public class Participant implements Serializable {
     public void setWorkgroup(WorkGroup workgroup) {
         this.workgroup = workgroup;
     }
-    
 
-    
+    public boolean isMale() {
+        if (gender == Gender.Male) {
+            male = true;
+        } else {
+            male = false;
+        }
+        return male;
+    }
 
 }

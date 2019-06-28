@@ -52,9 +52,19 @@ public class ParticipantController implements Serializable {
     private List<Participant> items = null;
     private Participant selected;
 
+    private List<Participant> daysOneParticipants = null;
+    private List<Participant> daysTwoParticipants = null;
+    
+    
+    
     private UploadedFile file;
 
     public ParticipantController() {
+    }
+    
+    
+    public void nextDayOneParticipant(){
+        
     }
 
     public CategoryController getCategoryController() {
@@ -288,6 +298,30 @@ public class ParticipantController implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public List<Participant> getDaysOneParticipants() {
+        if(daysOneParticipants==null){
+            String j = "Select p from Participant p where p.firstDay=true order by p.id";
+            daysOneParticipants = getFacade().findBySQL(j);
+        }
+        return daysOneParticipants;
+    }
+
+    public void setDaysOneParticipants(List<Participant> daysOneParticipants) {
+        this.daysOneParticipants = daysOneParticipants;
+    }
+
+    public List<Participant> getDaysTwoParticipants() {
+        if(daysTwoParticipants==null){
+            String j = "Select p from Participant p where p.secondDay=true order by p.id";
+            daysTwoParticipants = getFacade().findBySQL(j);
+        }
+        return daysTwoParticipants;
+    }
+
+    public void setDaysTwoParticipants(List<Participant> daysTwoParticipants) {
+        this.daysTwoParticipants = daysTwoParticipants;
     }
 
     @FacesConverter(forClass = Participant.class)

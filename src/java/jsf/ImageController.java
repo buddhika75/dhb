@@ -5,8 +5,6 @@
  */
 package jsf;
 
-
-
 import entity.Participant;
 import java.io.ByteArrayInputStream;
 import javax.inject.Named;
@@ -25,17 +23,12 @@ import org.primefaces.model.StreamedContent;
 @RequestScoped
 public class ImageController {
 
-   
     @Inject
     InstitutionController messageController;
 
     public InstitutionController getInstitutionController() {
         return messageController;
     }
-
-   
-
-    
 
     /**
      * Creates a new instance of ImageController
@@ -70,6 +63,6 @@ public class ImageController {
 
     }
 
-   
+    
 
 }

@@ -4,6 +4,7 @@ import entity.Institution;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
 import bean.InstitutionFacade;
+import bean.ParticipantFacade;
 import entity.Category;
 import entity.Participant;
 
@@ -23,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import org.primefaces.event.CaptureEvent;
 
 @Named("institutionController")
@@ -31,11 +33,48 @@ public class InstitutionController implements Serializable {
 
     @EJB
     private bean.InstitutionFacade ejbFacade;
+    @EJB
+    ParticipantFacade participantFacade;
+    @Inject
+    private ParticipantController participantController;
     private List<Institution> items = null;
     private List<Institution> categoryItems = null;
     private Institution selected;
     private Category category;
     private Participant selectedParcipant;
+    int dayOnePartipantNo;
+    int dayTwoParticipantNo;
+
+    public void nextDayOneParticipant() {
+        if(getParticipantController().getDaysOneParticipants()==null){
+            return;
+        }
+        if(getParticipantController().getDaysOneParticipants().isEmpty()){
+            return;
+        }
+        if(dayOnePartipantNo>=getParticipantController().getDaysOneParticipants().size()){
+            dayOnePartipantNo=0;
+        }else{
+            dayOnePartipantNo++;
+        }
+        Long temid = getParticipantController().getDaysOneParticipants().get(dayOnePartipantNo).getId();
+        setSelectedParcipant(participantFacade.find(temid));
+    }
+    
+    public void nextDayTwoParticipant() {
+        if(getParticipantController().getDaysTwoParticipants()==null){
+            return;
+        }
+        if(getParticipantController().getDaysTwoParticipants().isEmpty()){
+            return;
+        }
+        if(dayTwoParticipantNo>=getParticipantController().getDaysTwoParticipants().size()){
+            dayTwoParticipantNo=0;
+        }else{
+            dayTwoParticipantNo++;
+        }
+        setSelectedParcipant(getParticipantController().getDaysTwoParticipants().get(dayTwoParticipantNo));
+    }
 
     public String toParticipant() {
         if (selected == null) {
@@ -124,15 +163,14 @@ public class InstitutionController implements Serializable {
         }
     }
 
-   
-
     public void clearPhoto() {
         if (selectedParcipant == null) {
             return;
         }
 
         selectedParcipant.setBaImage(null);
-        update();
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Photo Cleared");
     }
 
     public void clearSignature() {
@@ -140,23 +178,29 @@ public class InstitutionController implements Serializable {
             return;
         }
         selectedParcipant.setSignature(null);
-        update();
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Signature Cleared");
     }
-    
-     public void registerForDayOne() {
+
+    public void registerForDayOne() {
         if (selectedParcipant == null) {
             return;
         }
         selectedParcipant.setFirstDay(true);
-        update();
+        getParticipantController().setDaysOneParticipants(null);
+        getFacade().edit(selected);
+        participantFacade.edit(selectedParcipant);
+        JsfUtil.addSuccessMessage("Registered for day 1");
     }
-     
-     public void registerForDayTwo() {
+
+    public void registerForDayTwo() {
         if (selectedParcipant == null) {
             return;
         }
+        getParticipantController().setDaysTwoParticipants(null);
         selectedParcipant.setSecondDay(true);
-        update();
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Registered for day 2");
     }
 
     public String updateAndToPhoto() {
@@ -166,12 +210,14 @@ public class InstitutionController implements Serializable {
     }
 
     public String updateAndToSignature() {
-        update();
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Please Sign");
         return "participant_signature";
     }
 
     public String updateAndToRegister() {
-        update();
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("Details Updated");
         return "participant_register";
     }
 
@@ -202,8 +248,6 @@ public class InstitutionController implements Serializable {
         return "";
     }
 
-    
-    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InstitutionUpdated"));
     }
@@ -293,6 +337,10 @@ public class InstitutionController implements Serializable {
 
     public void setSelectedParcipant(Participant selectedParcipant) {
         this.selectedParcipant = selectedParcipant;
+    }
+
+    public ParticipantController getParticipantController() {
+        return participantController;
     }
 
     @FacesConverter(forClass = Institution.class)
