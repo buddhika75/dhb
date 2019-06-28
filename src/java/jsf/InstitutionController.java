@@ -45,32 +45,55 @@ public class InstitutionController implements Serializable {
     int dayOnePartipantNo;
     int dayTwoParticipantNo;
 
+    private String strUserId;
+
+    public void setMe() {
+        System.out.println("set me");
+        if (strUserId == null) {
+            selectedParcipant = null;
+            return;
+        }
+        if (strUserId.trim().equals("")) {
+            selectedParcipant = null;
+            return;
+        }
+        Long temId;
+        try {
+            temId = Long.parseLong(strUserId);
+        } catch (Exception e) {
+            selectedParcipant = null;
+            return;
+        }
+        System.out.println("temId = " + temId);
+        selectedParcipant = participantFacade.find(temId);
+    }
+
     public void nextDayOneParticipant() {
-        if(getParticipantController().getDaysOneParticipants()==null){
+        if (getParticipantController().getDaysOneParticipants() == null) {
             return;
         }
-        if(getParticipantController().getDaysOneParticipants().isEmpty()){
+        if (getParticipantController().getDaysOneParticipants().isEmpty()) {
             return;
         }
-        if(dayOnePartipantNo>=getParticipantController().getDaysOneParticipants().size()){
-            dayOnePartipantNo=0;
-        }else{
+        if (dayOnePartipantNo >= getParticipantController().getDaysOneParticipants().size()) {
+            dayOnePartipantNo = 0;
+        } else {
             dayOnePartipantNo++;
         }
         Long temid = getParticipantController().getDaysOneParticipants().get(dayOnePartipantNo).getId();
         setSelectedParcipant(participantFacade.find(temid));
     }
-    
+
     public void nextDayTwoParticipant() {
-        if(getParticipantController().getDaysTwoParticipants()==null){
+        if (getParticipantController().getDaysTwoParticipants() == null) {
             return;
         }
-        if(getParticipantController().getDaysTwoParticipants().isEmpty()){
+        if (getParticipantController().getDaysTwoParticipants().isEmpty()) {
             return;
         }
-        if(dayTwoParticipantNo>=getParticipantController().getDaysTwoParticipants().size()){
-            dayTwoParticipantNo=0;
-        }else{
+        if (dayTwoParticipantNo >= getParticipantController().getDaysTwoParticipants().size()) {
+            dayTwoParticipantNo = 0;
+        } else {
             dayTwoParticipantNo++;
         }
         setSelectedParcipant(getParticipantController().getDaysTwoParticipants().get(dayTwoParticipantNo));
@@ -187,10 +210,19 @@ public class InstitutionController implements Serializable {
             return;
         }
         selectedParcipant.setFirstDay(true);
-        getParticipantController().setDaysOneParticipants(null);
         getFacade().edit(selected);
         participantFacade.edit(selectedParcipant);
+        getFacade().edit(selected);
+        getParticipantController().setDaysOneParticipants(null);
+        sendDayOneSms();
         JsfUtil.addSuccessMessage("Registered for day 1");
+    }
+
+    @Inject
+    SmsController smsController;
+
+    private void sendDayOneSms() {
+        smsController.sendSms("Thank you fore Registering for the first day. http://35.247.177.209:8080/ndhb/faces/me.xhtml?strUserId=" + selectedParcipant.getId(), selectedParcipant.getPhone());
     }
 
     public void registerForDayTwo() {
@@ -341,6 +373,14 @@ public class InstitutionController implements Serializable {
 
     public ParticipantController getParticipantController() {
         return participantController;
+    }
+
+    public String getStrUserId() {
+        return strUserId;
+    }
+
+    public void setStrUserId(String strUserId) {
+        this.strUserId = strUserId;
     }
 
     @FacesConverter(forClass = Institution.class)

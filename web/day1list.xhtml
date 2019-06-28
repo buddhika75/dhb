@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="body">
+                
+                
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        
+                        <p:commandButton value="Download" ajax="false" >
+                            <p:dataExporter target="tbl" type="csv" fileName="day1" ></p:dataExporter>
+                        </p:commandButton>
+                        
+                        <p:dataTable  id="tbl" value="#{participantController.daysOneParticipants}" var="item"
+                                     rowKey="#{item.id}"
+                                     rowIndexVar="n">
+                            
+                            <p:column headerText="No" >
+                                #{n+1}
+                            </p:column>
+                            
+                            <p:column filterBy="#{item.name}" sortBy="#{item.name}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Name"/>
+                                </f:facet>
+                                <h:outputText value="#{item.name}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.designation}" sortBy="#{item.designation}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Designation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.designation}"/>
+                            </p:column>
+                            <p:column  filterBy="" sortBy="" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Email"/>
+                                </f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.phone}" sortBy="#{item.phone}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Phone"/>
+                                </f:facet>
+                                <h:outputText value="#{item.phone}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.gender}" sortBy="#{item.gender}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Gender"/>
+                                </f:facet>
+                                <h:outputText value="#{item.gender}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.institution.name}" sortBy="#{item.institution.name}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Institution"/>
+                                </f:facet>
+                                <h:outputText value="#{item.institution.name}"/>
+                            </p:column>
+                            
+                            <p:column  filterBy="#{item.overnightStay}" sortBy="#{item.overnightStay}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Stay"/>
+                                </f:facet>
+                                <h:outputText value="#{item.overnightStay}"/>
+                            </p:column>
+                            
+                            <p:column  filterBy="#{item.roomType}" sortBy="#{item.roomType}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="RoomType"/>
+                                </f:facet>
+                                <h:outputText value="#{item.roomType}" rendered="#{item.overnightStay?'Yes':'No'}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.room.name}" sortBy="#{item.room.name}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Room"/>
+                                </f:facet>
+                                <h:outputText value="#{item.room.name}"/>
+                            </p:column>
+                            <p:column  filterBy="#{item.workgroup.name}" sortBy="#{item.workgroup.name}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Workgroup"/>
+                                </f:facet>
+                                <h:outputText value="#{item.workgroup.name}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+                
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -51,6 +51,14 @@
                                            var="groupItem"
                                            itemValue="#{groupItem}"/>
                         </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Day 1" />
+                        <p:selectBooleanCheckbox value="#{participantController.selected.firstDay}"  >
+                        </p:selectBooleanCheckbox>
+                        
+                         <p:outputLabel value="Day 2" />
+                         <p:selectBooleanCheckbox value="#{participantController.selected.secondDay}" ></p:selectBooleanCheckbox>
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{participantController.update}" value="#{bundle.Save}" update="display,:ParticipantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParticipantEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantEditDialog.hide()"/>

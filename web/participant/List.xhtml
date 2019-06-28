@@ -90,7 +90,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListParticipantTitle_roomType}"/>
                             </f:facet>
-                            <h:outputText value="#{item.roomType}"/>
+                            <h:outputText value="#{item.roomType}" rendered="#{item.overnightStay}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

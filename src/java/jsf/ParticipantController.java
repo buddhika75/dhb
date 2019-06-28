@@ -1,5 +1,6 @@
 package jsf;
 
+import bean.InstitutionFacade;
 import entity.Participant;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
@@ -52,6 +53,8 @@ public class ParticipantController implements Serializable {
     private List<Participant> items = null;
     private Participant selected;
 
+    private String strUserId;
+    
     private List<Participant> daysOneParticipants = null;
     private List<Participant> daysTwoParticipants = null;
     
@@ -63,9 +66,7 @@ public class ParticipantController implements Serializable {
     }
     
     
-    public void nextDayOneParticipant(){
-        
-    }
+   
 
     public CategoryController getCategoryController() {
         return categoryController;
@@ -232,13 +233,17 @@ public class ParticipantController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
             selected.getInstitution().getParticipants().add(selected);
+            institutionFacade.edit(selected.getInstitution());
         }
     }
 
-   
+   @EJB
+   InstitutionFacade institutionFacade;
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ParticipantUpdated"));
+        selected.getInstitution().getParticipants().add(selected);
+        institutionFacade.edit(selected.getInstitution());
     }
 
     public void destroy() {
@@ -323,6 +328,16 @@ public class ParticipantController implements Serializable {
     public void setDaysTwoParticipants(List<Participant> daysTwoParticipants) {
         this.daysTwoParticipants = daysTwoParticipants;
     }
+
+    public String getStrUserId() {
+        return strUserId;
+    }
+
+    public void setStrUserId(String strUserId) {
+        this.strUserId = strUserId;
+    }
+    
+    
 
     @FacesConverter(forClass = Participant.class)
     public static class ParticipantControllerConverter implements Converter {
