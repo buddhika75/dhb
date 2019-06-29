@@ -9,7 +9,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-28T12:23:24")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-29T04:44:06")
 @StaticMetamodel(Participant.class)
 public class Participant_ { 
 
@@ -19,6 +19,7 @@ public class Participant_ {
     public static volatile SingularAttribute<Participant, String> signature;
     public static volatile SingularAttribute<Participant, Boolean> secondDay;
     public static volatile SingularAttribute<Participant, Room> room;
+    public static volatile SingularAttribute<Participant, String> signature2;
     public static volatile SingularAttribute<Participant, Institution> institution;
     public static volatile SingularAttribute<Participant, Boolean> firstDay;
     public static volatile SingularAttribute<Participant, String> phone;

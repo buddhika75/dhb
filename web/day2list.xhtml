@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="body">
+
+
+                <f:view>
+
+
+                    <h:form>
+                        <p:panel header="Day Two Participants" >
+                            <h:panelGrid columns="4" >
+                                <p:commandButton value="Download" ajax="false" >
+                                    <p:dataExporter target="tbl" type="csv" fileName="day2" ></p:dataExporter>
+                                </p:commandButton>
+                                <p:commandButton value="Print" ajax="false" >
+                                    <p:printer target="tbl" ></p:printer>
+                                </p:commandButton>
+                                <p:commandButton value="Refresh" ajax="false" action="#{participantController.fillDayTwoParticipantList()}" >
+                                </p:commandButton>
+                                <p:commandButton value="Back" ajax="false" action="reports" >
+                                </p:commandButton>
+                            </h:panelGrid>
+
+                            <p:dataTable  id="tbl" value="#{participantController.daysTwoParticipants}" var="item"
+                                          rowKey="#{item.id}"
+                                          rowIndexVar="n">
+
+                                <p:column headerText="No" width="20" >
+                                     <h:outputText value="#{n+1}"/>
+                                </p:column>
+
+                                <p:column filterBy="#{item.name}" sortBy="#{item.name}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.name}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.designation}" sortBy="#{item.designation}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Designation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.designation}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.email}" sortBy="#{item.email}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Email"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.email}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.phone}" sortBy="#{item.phone}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Phone"/>
+                                    </f:facet>
+                                    <h:outputText value=" "/>
+                                    <h:outputText value="#{item.phone}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.gender}" sortBy="#{item.gender}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Gender"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.gender}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.institution.category.name}" sortBy="#{item.institution.category.name}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Category"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.institution.category.name}"/>
+                                </p:column>
+                                <p:column  filterBy="#{item.institution.name}" sortBy="#{item.institution.name}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Institution"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.institution.name}"/>
+                                </p:column>
+                                <p:column width="60"  filterBy="#{item.overnightStay}" sortBy="#{item.overnightStay}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Stay"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.overnightStay?'Yes':'No'}"/>
+                                </p:column>
+                                <p:column headerText="Action" width="50" exportable="false" >
+                                    <p:commandButton ajax="false" value="Edit" action="edit_participant" >
+                                        <f:setPropertyActionListener value="#{item}" target="#{participantController.selected}" ></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+
+
+
+
+
+
+
+
+
+                    </h:form>
+                </f:view>
+
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -113,6 +113,21 @@ public class InstitutionController implements Serializable {
         }
     }
 
+    
+    public String toParticipantDayTwo() {
+        if (selected == null) {
+            return "";
+        }
+        if (selected.getParticipants().size() > 1) {
+            selectedParcipant = null;
+            return "participants_day2";
+        } else {
+
+            selectedParcipant = selected.getParticipants().get(0);
+            return "participant_register_day2";
+        }
+    }
+
     public InstitutionController() {
     }
 
@@ -225,6 +240,10 @@ public class InstitutionController implements Serializable {
         smsController.sendSms("Thank you fore Registering for the first day. http://35.247.177.209:8080/ndhb/faces/me.xhtml?strUserId=" + selectedParcipant.getId(), selectedParcipant.getPhone());
     }
 
+    private void sendDayTwoSms() {
+        smsController.sendSms("Thank you fore Registering for the second day. http://35.247.177.209:8080/ndhb/faces/me.xhtml?strUserId=" + selectedParcipant.getId(), selectedParcipant.getPhone());
+    }
+
     public void registerForDayTwo() {
         if (selectedParcipant == null) {
             return;
@@ -232,6 +251,7 @@ public class InstitutionController implements Serializable {
         getParticipantController().setDaysTwoParticipants(null);
         selectedParcipant.setSecondDay(true);
         getFacade().edit(selected);
+        sendDayTwoSms();
         JsfUtil.addSuccessMessage("Registered for day 2");
     }
 

@@ -62,6 +62,9 @@ public class Participant implements Serializable {
 
     @Lob
     private String signature;
+    
+    @Lob
+    private String signature2;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
@@ -259,5 +262,15 @@ public class Participant implements Serializable {
         }
         return male;
     }
+
+    public String getSignature2() {
+        return signature2;
+    }
+
+    public void setSignature2(String signature2) {
+        this.signature2 = signature2;
+    }
+    
+    
 
 }

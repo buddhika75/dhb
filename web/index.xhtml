@@ -25,12 +25,35 @@
                         </ui:repeat>
 
                     </div>
+                    <div class="w3-row" style="font-family: 'Passion One', cursive; font-size: 2em; text-align: center;" >
+
+                        <table >
+                            <tr>
+                                <td>
+                                    Number of Participants for day one
+                                </td>
+                                <td>
+                                    #{participantController.daysOneParticipants.size()}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Number of Participants for day Two
+                                </td>
+                                <td>
+                                    #{participantController.daysTwoParticipants.size()}
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
                 </h:form>
             </ui:define>
 
         </ui:composition>
 
-       
+
     </body>
 
 

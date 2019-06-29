@@ -18,7 +18,8 @@
                         <ui:repeat value="#{institutionController.categoryItems}" var="c" >
                             <div class="w3-col s12 m6 l4 w3-padding" >
 
-                                <h:commandLink value="#{c.name}" class="w3-button w3-bar-item w3-deep-orange w3-round-large" action="#{institutionController.toParticipant()}"
+                                <h:commandLink value="#{c.name}" class="w3-button w3-bar-item w3-deep-orange w3-round-large" 
+                                               action="#{institutionController.toParticipantDayTwo()}"
                                                style="width: 80%; padding: 2%;  color: #{c.foregroundColour}; background-color: #{c.backgoundColour}">
                                     <f:setPropertyActionListener value="#{c}" target="#{institutionController.selected}" ></f:setPropertyActionListener>
                                 </h:commandLink>

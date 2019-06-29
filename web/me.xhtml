@@ -15,122 +15,105 @@
     <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
     <h:head>
     </h:head>
-    <h:body>
+    <h:body  style="font-family: 'Passion One', cursive; font-size: 2em; text-align: center;">
 
         <h:panelGroup id="participant" >
-            
-            
-            
-            <div 
-                class="w3-card-4 w3-sand w3-padding" style="margin: 2% auto; width: 80%!important;height: 80%!important;font-family: 'Passion One', cursive; font-size: 2em; text-align: center; padding: 5%;" >
-
-
-                <table style="text-align: center; width: 98%;">
-
-
-                    <tr>
-                        <td colspan="2" style="text-align: center;" >
-                            <div class="w3-card-4 w3-padding w3-margin w3-cyan"  >
-                                <table style="width: 100%;" >
-                                    <tr>
-                                        <td  >
-                                            <h2>
-                                                <h:outputLabel  value="Welcome to Day 1"/>
-                                            </h2>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h3>
-                                                <h:outputLabel  value="Preparatory Workshop on National Digital Health Blueprint"/>
-                                            </h3>
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-
-                        <td>
-                            <div class="w3-card-4 w3-padding w3-aqua" >
-
-                                <h:panelGroup id="photo" >
-
-                                    <p:graphicImage   
-                                        cache="false" 
-                                        rendered="#{imageController.image ne null}"    
-                                        value="#{imageController.image}"  style="width: 400px;"  >
-                                    </p:graphicImage>
-
-                                    <h:panelGroup  rendered="#{institutionController.selectedParcipant.baImage eq null}" >
-                                        <p:graphicImage library="image" name="male.png" rendered="#{institutionController.selectedParcipant.male}" style="width: 400px;" >
-                                        </p:graphicImage>
-                                        <p:graphicImage library="image" name="female.png" rendered="#{!institutionController.selectedParcipant.male}"  style="width: 400px;"  >
-                                        </p:graphicImage>
-                                    </h:panelGroup>
-
-                                </h:panelGroup>
-
-
-
-
-                            </div>
-                        </td>
-
-
-                        <td>
-                            <div class="w3-card-4 w3-padding w3-light-blue" >
-
-                                <table width="550">
-
-                                    <tr>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel value="Name:" />
-                                        </td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel id="name"  value="#{institutionController.selectedParcipant.name}"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel value="Designation:"  />
-                                        </td>
-                                        <td></td>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel id="des" value="#{institutionController.selectedParcipant.designation}" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel value="Email:"   />
-                                        </td>
-                                        <td></td>
-                                        <td style="text-align: left;">
-                                            <h:outputLabel id="email" value="#{institutionController.selectedParcipant.email}" title="Email" />
-                                        </td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                        </td>
-
-                    </tr>
-                </table>
 
 
 
 
 
+            <table style="text-align: center; width: 98%;">
+
+                <tr>
+                    <td>
+
+                        <h:outputLabel  value="Welcome to Day Two" style="font-size: 150%;"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <h:outputLabel  value="Preparatory Workshop on National Digital Health Blueprint" style="font-size: 130%;"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:panelGroup id="photo" >
+
+                            <p:graphicImage   
+                                cache="false" 
+                                rendered="#{imageController.image ne null}"    
+                                value="#{imageController.image}"  style="width: 400px;"  >
+                            </p:graphicImage>
+
+                            <h:panelGroup  rendered="#{institutionController.selectedParcipant.baImage eq null}" >
+                                <p:graphicImage library="image" name="male.png" rendered="#{institutionController.selectedParcipant.male}" style="width: 400px;" >
+                                </p:graphicImage>
+                                <p:graphicImage library="image" name="female.png" rendered="#{!institutionController.selectedParcipant.male}"  style="width: 400px;"  >
+                                </p:graphicImage>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table >
+
+                            <tr>
+                                <td style="text-align: left;">
+                                    <h:outputLabel value="Name:" />
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td style="text-align: left;">
+                                    <h:outputLabel id="name"  value="#{institutionController.selectedParcipant.name}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <h:outputLabel value="Designation:"  />
+                                </td>
+                                <td></td>
+                                <td style="text-align: left;">
+                                    <h:outputLabel id="des" value="#{institutionController.selectedParcipant.designation}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <h:outputLabel value="Email:"   />
+                                </td>
+                                <td></td>
+                                <td style="text-align: left;">
+                                    <h:outputLabel id="email" value="#{institutionController.selectedParcipant.email}" title="Email" />
+                                </td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">
+                                    <h:outputLabel value="Institution:"   />
+                                </td>
+                                <td></td>
+                                <td style="text-align: left;">
+                                    <h:outputLabel id="email" value="#{institutionController.selectedParcipant.institution.name}" title="Email" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
 
-            </div>
+
+
+            </table>
+
+
+
+
+
         </h:panelGroup>
 
 

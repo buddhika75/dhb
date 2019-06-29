@@ -9,6 +9,7 @@ import entity.Category;
 import entity.Gender;
 import entity.Institution;
 import entity.RoomType;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +37,8 @@ import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 @Named("participantController")
@@ -307,7 +310,7 @@ public class ParticipantController implements Serializable {
 
     public List<Participant> getDaysOneParticipants() {
         if(daysOneParticipants==null){
-            String j = "Select p from Participant p where p.firstDay=true order by p.id";
+            String j = "Select p from Participant p where p.firstDay=true order by p.name";
             daysOneParticipants = getFacade().findBySQL(j);
         }
         return daysOneParticipants;
@@ -316,10 +319,46 @@ public class ParticipantController implements Serializable {
     public void setDaysOneParticipants(List<Participant> daysOneParticipants) {
         this.daysOneParticipants = daysOneParticipants;
     }
+    
+    public void fillDayOneParticipantList(){
+        daysOneParticipants=null;
+        getDaysOneParticipants();
+    }
+    
+    
+    
+    public StreamedContent getPhotoById() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getRenderResponse()) {
+            // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        } else {
+            // So, browser is requesting the image. Get ID value from actual request param.
+            String id = context.getExternalContext().getRequestParameterMap().get("id");
+            Long l;
+            try {
+                l = Long.valueOf(id);
+            } catch (NumberFormatException e) {
+                l = 0l;
+            }
+            Participant temImg = getFacade().find(Long.valueOf(id));
+            if (temImg != null) {
+                return new DefaultStreamedContent(new ByteArrayInputStream(temImg.getBaImage()), temImg.getFileType());
+            } else {
+                return new DefaultStreamedContent();
+            }
+        }
+    }
+
+    
+    public void fillDayTwoParticipantList(){
+        daysTwoParticipants=null;
+        getDaysTwoParticipants();
+    }
 
     public List<Participant> getDaysTwoParticipants() {
         if(daysTwoParticipants==null){
-            String j = "Select p from Participant p where p.secondDay=true order by p.id";
+            String j = "Select p from Participant p where p.secondDay=true order by p.name";
             daysTwoParticipants = getFacade().findBySQL(j);
         }
         return daysTwoParticipants;
