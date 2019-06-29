@@ -22,8 +22,8 @@
                                 <p:commandButton value="Download" ajax="false" >
                                     <p:dataExporter target="tbl" type="csv" fileName="day2" ></p:dataExporter>
                                 </p:commandButton>
-                                <p:commandButton value="Print" ajax="false" >
-                                    <p:printer target="tbl" ></p:printer>
+                                <p:commandButton id="btnPrint" value="Print" ajax="false" >
+                                    <p:printer target="tbld"  ></p:printer>
                                 </p:commandButton>
                                 <p:commandButton value="Refresh" ajax="false" action="#{participantController.fillDayTwoParticipantList()}" >
                                 </p:commandButton>
@@ -88,7 +88,7 @@
                                     </f:facet>
                                     <h:outputText value="#{item.overnightStay?'Yes':'No'}"/>
                                 </p:column>
-                                <p:column headerText="Action" width="50" exportable="false" >
+                                <p:column headerText="Action" width="50" exportable="false"  >
                                     <p:commandButton ajax="false" value="Edit" action="edit_participant" >
                                         <f:setPropertyActionListener value="#{item}" target="#{participantController.selected}" ></f:setPropertyActionListener>
                                     </p:commandButton>
@@ -97,6 +97,61 @@
                         </p:panel>
 
 
+                        <div style="display: none;" >
+                            
+                            <p:dataTable  id="tbld" value="#{participantController.daysTwoParticipants}" var="i"
+                                          rowKey="#{i.id}"
+                                          rowIndexVar="c">
+
+                                <p:column headerText="No" width="20" >
+                                     <h:outputText value="#{c+1}"/>
+                                </p:column>
+
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.name}"/>
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Designation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.designation}"/>
+                                </p:column>
+                                <p:column  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Email"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.email}"/>
+                                </p:column>
+                                <p:column  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Phone"/>
+                                    </f:facet>
+                                    <h:outputText value=" "/>
+                                    <h:outputText value="#{i.phone}"/>
+                                </p:column>
+                                <p:column  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Gender"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.gender}"/>
+                                </p:column>
+                                <p:column  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Institution"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.institution.name}"/>
+                                </p:column>
+                                <p:column width="60"  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Stay"/>
+                                    </f:facet>
+                                    <h:outputText value="#{i.overnightStay?'Yes':'No'}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
 
 
 

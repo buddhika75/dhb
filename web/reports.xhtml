@@ -15,17 +15,20 @@
                     <h:panelGrid columns="3" >
                         <p:panel header="Day One Reports" >
                             <h:panelGrid columns="1" >
-                                <p:commandButton value="Name List" ajax="false" action="day1list"></p:commandButton>
+                                <p:commandButton value="List of Participants" ajax="false" action="day1list"></p:commandButton>
+                                <p:commandButton value="Details of Participants" ajax="false" action="day1lists"></p:commandButton>
                             </h:panelGrid>
                         </p:panel>
                         <p:panel header="Day Two Reports" >
-                            <h:panelGrid columns="2" >
-                                <p:commandButton value="Name List" ajax="false" action="day2list"></p:commandButton>
+                            <h:panelGrid columns="1" >
+                                <p:commandButton value="List of Participants" ajax="false" action="day2list"></p:commandButton>
                             </h:panelGrid>
 
                         </p:panel>
                         <p:panel header="Other Reports" >
-
+                            <h:panelGrid columns="2" >
+                                <p:commandButton value="Expected List" ajax="false" action="/participant/List"></p:commandButton>
+                            </h:panelGrid>
                         </p:panel>
 
                     </h:panelGrid>

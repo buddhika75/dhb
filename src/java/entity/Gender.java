@@ -11,5 +11,9 @@ package entity;
  */
 public enum Gender {
     Male,
-    Female,
+    Female;
+    
+    public String getLabel(){
+        return this.toString();
+    }
 }

@@ -22,7 +22,7 @@
                                 <p:commandButton value="Download" ajax="false" >
                                     <p:dataExporter target="tbl" type="csv" fileName="day1" ></p:dataExporter>
                                 </p:commandButton>
-                                <p:commandButton value="Print" ajax="false" >
+                                <p:commandButton id="btnPrint" value="Print" ajax="false" >
                                     <p:printer target="tbld"  ></p:printer>
                                 </p:commandButton>
                                 <p:commandButton value="Refresh" ajax="false" action="#{participantController.fillDayOneParticipantList()}" >
@@ -64,11 +64,11 @@
                                     <h:outputText value=" "/>
                                     <h:outputText value="#{item.phone}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.gender}" sortBy="#{item.gender}" filterMatchMode="contains">
+                                <p:column  filterBy="#{item.gender.label}" sortBy="#{item.gender.label}" filterMatchMode="contains">
                                     <f:facet name="header">
                                         <h:outputText value="Gender"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.gender}"/>
+                                    <h:outputText value="#{item.gender.label}"/>
                                 </p:column>
                                 <p:column  filterBy="#{item.institution.category.name}" sortBy="#{item.institution.category.name}" filterMatchMode="contains">
                                     <f:facet name="header">
@@ -99,62 +99,56 @@
 
                         <div style="display: none;" >
                             
-                            <p:dataTable  id="tbld" value="#{participantController.daysOneParticipants}" var="item"
-                                          rowKey="#{item.id}"
-                                          rowIndexVar="n">
+                            <p:dataTable  id="tbld" value="#{participantController.daysOneParticipants}" var="i"
+                                          rowKey="#{i.id}"
+                                          rowIndexVar="c">
 
                                 <p:column headerText="No" width="20" >
-                                     <h:outputText value="#{n+1}"/>
+                                     <h:outputText value="#{c+1}"/>
                                 </p:column>
 
-                                <p:column filterBy="#{item.name}">
+                                <p:column >
                                     <f:facet name="header">
                                         <h:outputText value="Name"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.name}"/>
+                                    <h:outputText value="#{i.name}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.designation}" >
+                                <p:column >
                                     <f:facet name="header">
                                         <h:outputText value="Designation"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.designation}"/>
+                                    <h:outputText value="#{i.designation}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.email}">
+                                <p:column  >
                                     <f:facet name="header">
                                         <h:outputText value="Email"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.email}"/>
+                                    <h:outputText value="#{i.email}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.phone}">
+                                <p:column  >
                                     <f:facet name="header">
                                         <h:outputText value="Phone"/>
                                     </f:facet>
                                     <h:outputText value=" "/>
-                                    <h:outputText value="#{item.phone}"/>
+                                    <h:outputText value="#{i.phone}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.gender}" >
+                                <p:column  >
                                     <f:facet name="header">
                                         <h:outputText value="Gender"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.gender}"/>
+                                    <h:outputText value="#{i.gender}"/>
                                 </p:column>
-                                <p:column  filterBy="#{item.institution.category.name}" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Category"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.institution.category.name}"/>
-                                </p:column>
-                                <p:column  filterBy="#{item.institution.name}" >
+                                <p:column  >
                                     <f:facet name="header">
                                         <h:outputText value="Institution"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.institution.name}"/>
+                                    <h:outputText value="#{i.institution.name}"/>
                                 </p:column>
-                                <p:column width="60"  filterBy="#{item.overnightStay}">
+                                <p:column width="60"  >
                                     <f:facet name="header">
                                         <h:outputText value="Stay"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.overnightStay?'Yes':'No'}"/>
+                                    <h:outputText value="#{i.overnightStay?'Yes':'No'}"/>
                                 </p:column>
                             </p:dataTable>
                         </div>

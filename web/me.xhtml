@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Passion+One&amp;display=swap" rel="stylesheet"></link>
     <h:head>
     </h:head>
-    <h:body  style="font-family: 'Passion One', cursive; font-size: 2em; text-align: center;">
+    <h:body  style="font-family: 'Passion One', cursive; font-size: 1em; text-align: center;">
 
         <h:panelGroup id="participant" >
 
@@ -46,7 +46,7 @@
                             <p:graphicImage   
                                 cache="false" 
                                 rendered="#{imageController.image ne null}"    
-                                value="#{imageController.image}"  style="width: 400px;"  >
+                                value="#{imageController.image}"  style="width: 90%;"  >
                             </p:graphicImage>
 
                             <h:panelGroup  rendered="#{institutionController.selectedParcipant.baImage eq null}" >
@@ -103,6 +103,14 @@
                             </tr>
                         </table>
                     </td>
+                    <tr>
+                        <td>
+                            <h:outputLink style="font-size: 200%;color: red;"
+                                value="https://docs.google.com/forms/d/1TFR4flwbLW3RyAGlPWVltelWyvpMSyfUM-fVb3xpy1M/viewform?ts=5d169c62&amp;edit_requested=true">
+                                Please give us a Feedback
+                            </h:outputLink>
+                        </td>
+                    </tr>
                 </tr>
 
 
